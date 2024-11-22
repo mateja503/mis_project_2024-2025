@@ -18,27 +18,24 @@ class _ItemsListAll extends State<ItemsListAll> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Item>?>(
-      future: DatabaseHelper.getAllItems(),  // Fetch all items from the database
+      future: DatabaseHelper.getAllItems(),
       builder: (context, snapshot) {
-        // Check if data is available
         if (snapshot.connectionState == ConnectionState.waiting) {
-          //return Center(child: CircularProgressIndicator());// Loading indicator
           return WaitingToLoad();
         } else if (snapshot.hasError) {
-          return ErrorMessage(snapshot.error.toString());  // Error handling
+          return ErrorMessage(snapshot.error.toString());
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return NoItemsFound();  // No data found
+          return NoItemsFound();
         } else {
-          // If data is available, show it in the grid
           List<Item> items = snapshot.data!;
 
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3, // 3 columns in the grid
-              crossAxisSpacing: 10, // Spacing between columns
-              mainAxisSpacing: 10, // Spacing between rows
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
             ),
-            itemCount: items.length, // Number of items in the grid
+            itemCount: items.length,
             itemBuilder: (context, index) {
               Item item = items[index];
 
@@ -57,18 +54,17 @@ class _ItemsListAll extends State<ItemsListAll> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Assuming the item has an image field for display
                       AspectRatio(
                         aspectRatio: 16 / 7,
                         child: Image.network(
-                          item.image, // Use the image URL or asset path
-                          fit: BoxFit.cover, // Make the image cover the space
+                          item.image,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          item.name,  // Display the item's name
+                          item.name,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -78,7 +74,7 @@ class _ItemsListAll extends State<ItemsListAll> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
-                          '\$${item.price.toString()}',  // Display the price of the item
+                          '\$${item.price.toString()}',
                           style: TextStyle(
                             color: Colors.green,
                             fontSize: 14,

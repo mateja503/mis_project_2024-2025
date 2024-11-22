@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
           if (result == true) {
-            setState(() {});  // Refresh the UI when an item is added
+            setState(() {});  
           }
         },
         tooltip: 'Add Item',

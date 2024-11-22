@@ -35,9 +35,9 @@ class _ItemDetail extends State<ItemDetail>{
         future: DatabaseHelper.getItem(id!),
         builder: (context, snapshot){
             if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator()); // Loading indicator
+            return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-            return ErrorMessage(snapshot.error.toString());  // Error handling
+            return ErrorMessage(snapshot.error.toString());
             } else if (!snapshot.hasData || snapshot.data == null) {
             return NoItemsFound();  // No data found
             } else {
@@ -53,17 +53,16 @@ class _ItemDetail extends State<ItemDetail>{
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Assuming the item has an image field for display
                         Expanded(
                           child: Image.network(
-                            item.image, // Use the image URL or asset path
-                            fit: BoxFit.cover, // Make the image cover the space
+                            item.image,
+                            fit: BoxFit.cover,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            item.name,  // Display the item's name
+                            item.name,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -73,7 +72,7 @@ class _ItemDetail extends State<ItemDetail>{
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            item.description,  // Display the item's name
+                            item.description,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -84,7 +83,7 @@ class _ItemDetail extends State<ItemDetail>{
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
-                            '\$${item.price.toString()}',  // Display the price of the item
+                            '\$${item.price.toString()}',
                             style: TextStyle(
                               color: Colors.green,
                               fontSize: 14,

@@ -10,7 +10,6 @@ class ItemAdd extends StatefulWidget {
 }
 
 class _ItemAdd extends State<ItemAdd> {
-  // Controllers for item fields
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
@@ -18,9 +17,7 @@ class _ItemAdd extends State<ItemAdd> {
   TextEditingController inStoreCountController = TextEditingController();
   TextEditingController imageController = TextEditingController();
 
-  // Method to save the item to the database
   Future<void> saveItem() async {
-    // Convert text fields to their respective types
 
     String name = nameController.text;
     String description = descriptionController.text;
@@ -31,7 +28,6 @@ class _ItemAdd extends State<ItemAdd> {
 
 
 
-    // Check if required fields are provided
     if (name.isEmpty || price == null || inStoreCount == null || image.isEmpty || description.isEmpty ) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Please fill in all required fields")),
@@ -39,7 +35,6 @@ class _ItemAdd extends State<ItemAdd> {
       return;
     }
 
-    // Create an Item object
     Item newItem = Item(
       name: name,
       description: description,
@@ -49,10 +44,8 @@ class _ItemAdd extends State<ItemAdd> {
       image: image,
     );
 
-    // Insert the item into the database
     await DatabaseHelper.addItem(newItem);
 
-    // Show confirmation and navigate back
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text("Item saved successfully")),
     );
@@ -115,7 +108,6 @@ class _ItemAdd extends State<ItemAdd> {
 
   @override
   void dispose() {
-    // Dispose of controllers when done
     nameController.dispose();
     descriptionController.dispose();
     priceController.dispose();
